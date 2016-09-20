@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Microsoft.Owin.Security.NRII</id>
+    <version>1.1.0.0</version>
+    <title>Microsoft.Owin.Security.NRII</title>
+    <authors>hetaoos@gmail.com</authors>
+    <owners>hetaoos@gmail.com</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseUrl>
+    <projectUrl>https://github.com/hetaoos/Microsoft.Owin.Security.NRII</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>NRII open authentication provider for asp.net</description>
+    <copyright>Copyright 2015</copyright>
+    <tags>NRII OAuth asp.net Provider</tags>
+  </metadata>
+</package>

@@ -41,9 +41,9 @@ namespace Microsoft.Owin.Security.NRII
 
 
 
-        private const string AuthorizationEndPoint = "https://218.249.73.245/instru_war/oauth2/authorize.ins";
-        private const string TokenEndpoint = "https://218.249.73.245/instru_war/oauth2/access_token.ins";
-        private const string UserInfoEndpoint = "https://218.249.73.245/instru_war/oauth2/resource/userinfo.ins";
+        private const string AuthorizationEndPoint = "http://218.249.73.248:8080/OAuthServer/oauth2/authorize.ins";
+        private const string TokenEndpoint = "https://218.249.73.248/OAuthServer/oauth2/access_token.ins";//218.249.73.245
+        private const string UserInfoEndpoint = "https://218.249.73.248/OAuthServer/oauth2/resource/userinfo.ins";
 
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace Microsoft.Owin.Security.NRII
             : base(Constants.DefaultAuthenticationType)
         {
             Caption = Constants.DefaultAuthenticationType;
-            CallbackPath = new PathString("/signin-NRII");
+            CallbackPath = new PathString($"/signin-{Constants.DefaultAuthenticationType}");
             AuthenticationMode = AuthenticationMode.Passive;
             Scope = new List<string>
             {
@@ -148,6 +148,7 @@ namespace Microsoft.Owin.Security.NRII
                 TokenEndpoint = TokenEndpoint,
                 UserInfoEndpoint = UserInfoEndpoint
             };
+            Caption = "国家大仪平台";
         }
     }
 }

@@ -112,7 +112,7 @@ namespace Microsoft.Owin.Security.NRII.Provider
         /// </summary>
         public AuthenticationProperties Properties { get; set; }
 
-        private static string TryGetValue(JObject user, string propertyName)
+        internal static string TryGetValue(JObject user, string propertyName)
         {
             JToken value;
             return user.TryGetValue(propertyName, out value) ? value.ToString() : null;

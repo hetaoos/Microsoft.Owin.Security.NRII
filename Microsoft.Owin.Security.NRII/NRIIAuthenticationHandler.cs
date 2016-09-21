@@ -67,21 +67,23 @@ namespace Microsoft.Owin.Security.NRII
                 string requestPrefix = "https://" + Request.Host; // Schema must be HTTPS
                 string redirectUri = requestPrefix + Request.PathBase + Options.CallbackPath;
 
-                string requestQueryString = 
-                    "?grant_type=" + "authorization_code"
-                    + "&client_id=" + Options.AppId
-                    + "&client_secret=" + Options.AppSecret
-                    + "&code=" + code
-                    + "&redirect_uri=" + redirectUri;
+                var param = new List<KeyValuePair<string, string>>();
+                param.Add(new KeyValuePair<string, string>("client_id", Options.AppId));
+                param.Add(new KeyValuePair<string, string>("client_secret", Options.AppSecret));
+                param.Add(new KeyValuePair<string, string>("grant_type", "authorization_code"));
+                param.Add(new KeyValuePair<string, string>("code", code));
+                param.Add(new KeyValuePair<string, string>("redirect_uri", redirectUri));
+                FormUrlEncodedContent content = new FormUrlEncodedContent(param);
+
                 // Request the token
-                var requestMessage = new HttpRequestMessage(HttpMethod.Get, Options.Endpoints.TokenEndpoint + requestQueryString);
-                HttpResponseMessage tokenResponse = await httpClient.SendAsync(requestMessage);
+                HttpResponseMessage tokenResponse = await httpClient.PostAsync(Options.Endpoints.TokenEndpoint, content);
                 tokenResponse.EnsureSuccessStatusCode();
                 string text = await tokenResponse.Content.ReadAsStringAsync();
-                var queryString = HttpUtility.ParseQueryString("?" + text);
-                string accessToken = queryString.Get("access_token");
-                int expiresIn = Convert.ToInt32(queryString.Get("expires_in"));
+                JObject token = JObject.Parse(text);
 
+                string accessToken = NRIIAuthenticatedContext.TryGetValue(token, "access_token");
+                int expiresIn = Convert.ToInt32(NRIIAuthenticatedContext.TryGetValue(token, "expires_in"));
+                
                 // Get the NRII user
                 string requestInfoQueryString = "?access_token=" + accessToken;
                 HttpRequestMessage userRequest = new HttpRequestMessage(HttpMethod.Get, Options.Endpoints.UserInfoEndpoint + requestInfoQueryString);
@@ -116,7 +118,7 @@ namespace Microsoft.Owin.Security.NRII
             }
             catch (Exception ex)
             {
-                logger.WriteError(ex.Message);
+                logger.WriteError(ex.ToString());
             }
             return new AuthenticationTicket(null, properties);
         }

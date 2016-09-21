@@ -47,7 +47,7 @@ namespace Microsoft.Owin.Security.NRII
 
             if (String.IsNullOrEmpty(Options.SignInAsAuthenticationType))
                 Options.SignInAsAuthenticationType = app.GetDefaultSignInAsAuthenticationType();
-
+          
             httpClient = new HttpClient(ResolveHttpMessageHandler(Options))
             {
                 Timeout = Options.BackchannelTimeout,
@@ -73,19 +73,20 @@ namespace Microsoft.Owin.Security.NRII
         private HttpMessageHandler ResolveHttpMessageHandler(NRIIAuthenticationOptions options)
         {
             HttpMessageHandler handler = options.BackchannelHttpHandler ?? new WebRequestHandler();
-
-            // If they provided a validator, apply it or fail.
+            var webRequestHandler = handler as WebRequestHandler;
+            if (webRequestHandler == null)
+            {
+                throw new InvalidOperationException(Resources.Exception_ValidatorHandlerMismatch);
+            }
             if (options.BackchannelCertificateValidator != null)
             {
                 // Set the cert validate callback
-                var webRequestHandler = handler as WebRequestHandler;
-                if (webRequestHandler == null)
-                {
-                    throw new InvalidOperationException(Resources.Exception_ValidatorHandlerMismatch);
-                }
                 webRequestHandler.ServerCertificateValidationCallback = options.BackchannelCertificateValidator.Validate;
             }
-
+            else
+            {
+                webRequestHandler.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
+            }
             return handler;
         }
     }

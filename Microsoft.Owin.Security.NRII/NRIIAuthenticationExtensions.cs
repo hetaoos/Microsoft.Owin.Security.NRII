@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Owin;
-
+using static Microsoft.Owin.Security.NRII.NRIIAuthenticationOptions;
 
 namespace Microsoft.Owin.Security.NRII
 {
@@ -26,6 +26,15 @@ namespace Microsoft.Owin.Security.NRII
             {
                 AppId = appId,
                 AppSecret = appSecret
+            });
+        }
+        public static IAppBuilder UseNRIIAuthenticationTest(this IAppBuilder app, string appId, string appSecret)
+        {
+            return app.UseNRIIAuthentication(new NRIIAuthenticationOptions
+            {
+                AppId = appId,
+                AppSecret = appSecret,
+                Endpoints = NRIIAuthenticationEndpoints.CreateTestNRIIAuthenticationEndpoints(),
             });
         }
     }

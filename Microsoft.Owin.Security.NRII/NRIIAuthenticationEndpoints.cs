@@ -20,7 +20,7 @@ namespace Microsoft.Owin.Security.NRII
             /// <remarks>
             /// Defaults to https://218.249.73.245/instru_war/oauth2/authorize.ins
             /// </remarks>
-            public string AuthorizationEndpoint { get; set; }
+            public string AuthorizationEndPoint { get; set; }
 
             /// <summary>
             /// Endpoint which is used to exchange code for access token
@@ -28,7 +28,7 @@ namespace Microsoft.Owin.Security.NRII
             /// <remarks>
             /// Defaults to https://218.249.73.245/instru_war/oauth2/access_token.ins
             /// </remarks>
-            public string TokenEndpoint { get; set; }
+            public string TokenEndPoint { get; set; }
 
             /// <summary>
             /// Endpoint which is used to obtain user information after authentication
@@ -36,14 +36,26 @@ namespace Microsoft.Owin.Security.NRII
             /// <remarks>
             /// Defaults to https://218.249.73.245/instru_war/oauth2/resource/userinfo.ins
             /// </remarks>
-            public string UserInfoEndpoint { get; set; }
+            public string UserInfoEndPoint { get; set; }
+
+            public NRIIAuthenticationEndpoints()
+            {
+                AuthorizationEndPoint = "https://218.249.73.245/instru_war/oauth2/authorize.ins";
+                TokenEndPoint = "https://218.249.73.245/instru_war/oauth2/access_token.ins";
+                UserInfoEndPoint = "https://218.249.73.245/instru_war/oauth2/resource/userinfo.ins";
+
+            }
+
+            public static NRIIAuthenticationEndpoints CreateTestNRIIAuthenticationEndpoints()
+            {
+                return new NRIIAuthenticationEndpoints()
+                {
+                    AuthorizationEndPoint = "http://218.249.73.248:8080/OAuthServer/oauth2/authorize.ins",
+                    TokenEndPoint = "https://218.249.73.248/OAuthServer/oauth2/access_token.ins",
+                    UserInfoEndPoint = "https://218.249.73.248/OAuthServer/oauth2/resource/userinfo.ins",
+                };
+            }
         }
-
-
-
-        private const string AuthorizationEndPoint = "http://218.249.73.248:8080/OAuthServer/oauth2/authorize.ins";
-        private const string TokenEndpoint = "https://218.249.73.248/OAuthServer/oauth2/access_token.ins";//218.249.73.245
-        private const string UserInfoEndpoint = "https://218.249.73.248/OAuthServer/oauth2/resource/userinfo.ins";
 
 
         /// <summary>
@@ -142,12 +154,7 @@ namespace Microsoft.Owin.Security.NRII
                 "read"
             };
             BackchannelTimeout = TimeSpan.FromSeconds(60);
-            Endpoints = new NRIIAuthenticationEndpoints
-            {
-                AuthorizationEndpoint = AuthorizationEndPoint,
-                TokenEndpoint = TokenEndpoint,
-                UserInfoEndpoint = UserInfoEndpoint
-            };
+            Endpoints = new NRIIAuthenticationEndpoints();
             Caption = "国家大仪平台";
         }
     }

@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Microsoft.Owin.Security.NRII")]
 [assembly: AssemblyDescription("NRII Open Authentication Provider")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("imetric.cn")]
 [assembly: AssemblyProduct("Microsoft.Owin.Security.NRII")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyCopyright("Copyright © imetric.cn 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("1201a699-b045-4c1a-afcb-f89d1bf95a93")]
+[assembly: Guid("1201a699-b066-4c1a-afcb-f89d1bf95a95")]
 
 // Version information for an assembly consists of the following four values:
 //

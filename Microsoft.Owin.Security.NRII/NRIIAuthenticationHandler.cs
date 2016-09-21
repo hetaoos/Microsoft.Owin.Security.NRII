@@ -76,7 +76,7 @@ namespace Microsoft.Owin.Security.NRII
                 FormUrlEncodedContent content = new FormUrlEncodedContent(param);
 
                 // Request the token
-                HttpResponseMessage tokenResponse = await httpClient.PostAsync(Options.Endpoints.TokenEndpoint, content);
+                HttpResponseMessage tokenResponse = await httpClient.PostAsync(Options.Endpoints.TokenEndPoint, content);
                 tokenResponse.EnsureSuccessStatusCode();
                 string text = await tokenResponse.Content.ReadAsStringAsync();
                 JObject token = JObject.Parse(text);
@@ -86,7 +86,7 @@ namespace Microsoft.Owin.Security.NRII
                 
                 // Get the NRII user
                 string requestInfoQueryString = "?access_token=" + accessToken;
-                HttpRequestMessage userRequest = new HttpRequestMessage(HttpMethod.Get, Options.Endpoints.UserInfoEndpoint + requestInfoQueryString);
+                HttpRequestMessage userRequest = new HttpRequestMessage(HttpMethod.Get, Options.Endpoints.UserInfoEndPoint + requestInfoQueryString);
                 HttpResponseMessage userResponse = await httpClient.SendAsync(userRequest, Request.CallCancelled);
                 userResponse.EnsureSuccessStatusCode();
                 text = await userResponse.Content.ReadAsStringAsync();
@@ -164,7 +164,7 @@ namespace Microsoft.Owin.Security.NRII
                 string state = Options.StateDataFormat.Protect(properties);
 
                 string authorizationEndpoint =
-                    Options.Endpoints.AuthorizationEndpoint +
+                    Options.Endpoints.AuthorizationEndPoint +
                         "?client_id=" + Uri.EscapeDataString(Options.AppId) +
                         "&response_type=" + "code" +
                         "&state=" + Uri.EscapeDataString(state) +

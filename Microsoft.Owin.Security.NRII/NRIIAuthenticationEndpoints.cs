@@ -45,7 +45,10 @@ namespace Microsoft.Owin.Security.NRII
                 UserInfoEndPoint = "https://218.249.73.245/instru_war/oauth2/resource/userinfo.ins";
 
             }
-
+            /// <summary>
+            /// 返回测试地址
+            /// </summary>
+            /// <returns></returns>
             public static NRIIAuthenticationEndpoints CreateTestNRIIAuthenticationEndpoints()
             {
                 return new NRIIAuthenticationEndpoints()

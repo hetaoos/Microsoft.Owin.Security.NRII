@@ -19,7 +19,13 @@ namespace Microsoft.Owin.Security.NRII
 
             return app;
         }
-
+        /// <summary>
+        /// NRII： 使用正式接口
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="appId"></param>
+        /// <param name="appSecret"></param>
+        /// <returns></returns>
         public static IAppBuilder UseNRIIAuthentication(this IAppBuilder app, string appId, string appSecret)
         {
             return app.UseNRIIAuthentication(new NRIIAuthenticationOptions
@@ -28,6 +34,13 @@ namespace Microsoft.Owin.Security.NRII
                 AppSecret = appSecret
             });
         }
+        /// <summary>
+        /// NRII： 使用测试接口
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="appId"></param>
+        /// <param name="appSecret"></param>
+        /// <returns></returns>
         public static IAppBuilder UseNRIIAuthenticationTest(this IAppBuilder app, string appId, string appSecret)
         {
             return app.UseNRIIAuthentication(new NRIIAuthenticationOptions

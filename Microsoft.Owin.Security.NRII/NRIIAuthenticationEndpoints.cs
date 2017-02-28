@@ -18,7 +18,7 @@ namespace Microsoft.Owin.Security.NRII
             /// Endpoint which is used to redirect users to request NRII access
             /// </summary>
             /// <remarks>
-            /// Defaults to https://218.249.73.245/instru_war/oauth2/authorize.ins
+            /// Defaults to https://nrii.org.cn/instru_war/oauth2/authorize.ins
             /// </remarks>
             public string AuthorizationEndPoint { get; set; }
 
@@ -26,7 +26,7 @@ namespace Microsoft.Owin.Security.NRII
             /// Endpoint which is used to exchange code for access token
             /// </summary>
             /// <remarks>
-            /// Defaults to https://218.249.73.245/instru_war/oauth2/access_token.ins
+            /// Defaults to https://nrii.org.cn/instru_war/oauth2/access_token.ins
             /// </remarks>
             public string TokenEndPoint { get; set; }
 
@@ -34,15 +34,15 @@ namespace Microsoft.Owin.Security.NRII
             /// Endpoint which is used to obtain user information after authentication
             /// </summary>
             /// <remarks>
-            /// Defaults to https://218.249.73.245/instru_war/oauth2/resource/userinfo.ins
+            /// Defaults to https://nrii.org.cn/instru_war/oauth2/resource/userinfo.ins
             /// </remarks>
             public string UserInfoEndPoint { get; set; }
 
             public NRIIAuthenticationEndpoints()
             {
-                AuthorizationEndPoint = "https://218.249.73.245/instru_war/oauth2/authorize.ins";
-                TokenEndPoint = "https://218.249.73.245/instru_war/oauth2/access_token.ins";
-                UserInfoEndPoint = "https://218.249.73.245/instru_war/oauth2/resource/userinfo.ins";
+                AuthorizationEndPoint = "http://nrii.org.cn/instru_war/oauth2/authorize.ins";
+                TokenEndPoint = "https://nrii.org.cn/instru_war/oauth2/access_token.ins";
+                UserInfoEndPoint = "https://nrii.org.cn/instru_war/oauth2/resource/userinfo.ins";
 
             }
             /// <summary>
